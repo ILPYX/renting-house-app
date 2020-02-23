@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+
+// 导入semantic-ui 全局样式
+import 'semantic-ui-css/semantic.min.css'
+
+// 导入子组件
+import Login from './components/login/Login'
+import Layout from './components/layout/Layout'
+import NotFound from './components/404/404'
+
+class App extends React.Component {
+  render() {
+    return (
+      <Router>
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/layout" component={Layout} />
+          <Redirect exact from="/" to="/login" />
+          <Route component={NotFound} />
+        </Switch>
+      </Router>
+    );
+  }
 }
 
 export default App;
