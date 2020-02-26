@@ -80,6 +80,35 @@ class Home extends Component {
     })
   }
 
+  clickMenu = (id, menu_name) => {
+    switch (id) {
+      case 1:
+        // query 传参
+        // this.props.history.push(`/list?house_type=${id}&name=${menu_name}`)
+        // params 传参
+        this.props.history.push(`/list/${id}/${menu_name}`)
+        break
+
+      case 2:
+        // this.props.history.push(`/list?house_type=${id}&name=${menu_name}`)
+        this.props.history.push(`/list/${id}/${menu_name}`)
+        break
+
+      case 3:
+        // this.props.history.push(`/list?house_type=${id}&name=${menu_name}`)
+        this.props.history.push(`/list/${id}/${menu_name}`)
+        break
+
+      case 4:
+        // this.props.history.push(`/list?house_type=${id}&name=${menu_name}`)
+        this.props.history.push(`/list/${id}/${menu_name}`)
+        break
+
+      default:
+        break
+    }
+  }
+
   // 渲染菜单
   renderMenus = menus => {
     return (
@@ -129,7 +158,7 @@ class Home extends Component {
             <div>
               <Icon name="angle right" size="big" />
             </div>
-          </Item>         
+          </Item>
         </Item.Group>
       </div>
     )
@@ -200,7 +229,7 @@ class Home extends Component {
         <div className="home-topbar">
           <Input
             fluid
-            icon={{name: 'search', circluar: 'true', link: true }}
+            icon={{ name: 'search', circluar: 'true', link: true }}
             placeholder="搜房源..."
           />
         </div>
