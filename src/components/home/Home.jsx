@@ -10,6 +10,15 @@ import ImageGallery from 'react-image-gallery'
 // 导入轮播图样式
 import 'react-image-gallery/styles/css/image-gallery.css'
 
+// 导入地图, 计算器组件
+import Map from '../map/Map'
+import Calc from '../calc/Calc'
+
+// 导入react-redux中的connect
+import { connect } from "react-redux";
+
+import { mapAction, calcAction } from "../../store/actionCreators";
+
 // 自定义子组件, 用来显示房屋列表
 function HousesList({ title, houses }) {
   return (
@@ -102,6 +111,16 @@ class Home extends Component {
       case 4:
         // this.props.history.push(`/list?house_type=${id}&name=${menu_name}`)
         this.props.history.push(`/list/${id}/${menu_name}`)
+        break
+      
+      case 5:
+        // this.setState({isShowMap: true})
+        this.props.showMap()
+        break
+      
+      case 7:
+        // this.setState({isShowMap: true})
+        this.props.showCalc()
         break
 
       default:
@@ -219,12 +238,17 @@ class Home extends Component {
   render() {
     // 对state中的数据进行解构赋值
     const { isLoading, swipes, menus, infos, faqs, houses } = this.state
+    const { isShowMap, isShowCalc } = this.props
     return (
       <div className="home-container">
         {/* 加载器视图 */}
         <Dimmer active={isLoading} inverted>
           <Loader inverted>正在加载中...</Loader>
         </Dimmer>
+        {/* 地图 & 计算器 */}
+        {/* {isShowMap && <Map callback={this.hideMap} />} */}
+        {isShowMap && <Map />}
+        {isShowCalc && <Calc />}
         {/* 头部 */}
         <div className="home-topbar">
           <Input
@@ -257,4 +281,22 @@ class Home extends Component {
   }
 }
 
-export default Home
+const mapStateToProps = state => {
+  return {
+    isShowMap: state.isShowMap,
+    isShowCalc: state.isShowCalc
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    showMap() {
+      dispatch(mapAction(true))
+    },
+    showCalc() {
+      dispatch(calcAction(true))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

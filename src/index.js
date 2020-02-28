@@ -7,7 +7,16 @@ import App from './App';
 // 导入axios, 让它成为webpack的依赖
 import './axios'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// 导入store
+import store from './store'
+
+// 导入Provider
+import { Provider } from "react-redux";
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
